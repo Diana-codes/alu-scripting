@@ -1,14 +1,11 @@
-ve function that queries the Reddit API,
-parses the title of all hot articles,
-and prints a sorted count of given keywords"""
-
+#!/usr/bin/python3
+""" 3-count.py """
 import json
 import requests
 
 
 def count_words(subreddit, word_list, after="", count=[]):
-    """Function to count_words
-    """
+    """ prints a sorted count of given keywords """
 
     if after == "":
         count = [0] * len(word_list)
@@ -17,10 +14,10 @@ def count_words(subreddit, word_list, after="", count=[]):
     request = requests.get(url,
                            params={'after': after},
                            allow_redirects=False,
-                           headers={'user-agent': 'Mozilla/5.0'})
+                           headers={'User-Agent': 'Mozilla/5.0'})
 
     if request.status_code == 200:
-        data = response.json()
+        data = request.json()
 
         for topic in (data['data']['children']):
             for word in topic['data']['title'].split():
